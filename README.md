@@ -10,6 +10,9 @@ This repository is intended to be a place where I can share my skills and knowle
 
 Feel free to explore and download any work that may be of interest to you. I hope you find something that is useful or inspiring for your own projects. Thank you for visiting my repository!
 
+![image](https://user-images.githubusercontent.com/51556485/221163055-a4798128-eacf-4542-ac1a-d4ad70e4b587.png)
+
+
 ## Spanish Mode:
 
 ¡Bienvenido al repositorio de Cristian Estrada! Aquí encontrarás una colección de algunos de los trabajos más importantes que he desarrollado a lo largo de mi carrera como programador en los lenguajes que actualmente conozco.
