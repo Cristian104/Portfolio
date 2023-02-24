@@ -1,0 +1,27 @@
+{
+  "name": "portfolio-web",
+  "version": "1.0.0",
+  "description": "Our official Website for our Portfolio made with NodeJS",
+  "main": "text.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Cristian104/Portfolio.git"
+  },
+  "keywords": [
+    "Website",
+    "Porfolio",
+    "NodeJS"
+  ],
+  "author": "Cristian Estrada",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Cristian104/Portfolio/issues"
+  },
+  "homepage": "https://github.com/Cristian104/Portfolio#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
