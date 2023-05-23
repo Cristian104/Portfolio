@@ -6,6 +6,19 @@ console.log(
   "degrees Kelvin and we're converting it to Celsius and Fahrenheit\n"
 );
 
+console.log(
+    "Testing again this funciton",
+    kelvin,
+    "I think it works"
+);
+
+console.log(
+    "Testing again this funciton",
+    kelvin,
+    "I think it works"
+);
+
+
 // We set the value for celsius and add the formula
 const celsius = kelvin - 273;
 console.log("The temperature is", celsius, "degrees Celsius");
