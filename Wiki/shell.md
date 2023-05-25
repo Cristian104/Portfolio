@@ -19,10 +19,11 @@ Some of the key features of tmux include:
     Customization: tmux is highly customizable, with a wide range of configuration options and the ability to create custom key bindings and scripts.
 
 #### Commands
+``` shell
     Create a new window: Ctrl-b c
     Switch to the previous window: Ctrl-b p
     Switch to the next window: Ctrl-b n
     Create a new pane: Ctrl-b % (vertical split) or Ctrl-b " (horizontal split)
     Navigate between panes: Ctrl-b arrow key
     Resize a pane: Ctrl-b Ctrl-arrow key:lua require("lazy").open()
-
+```
