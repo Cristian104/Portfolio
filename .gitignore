@@ -3,4 +3,7 @@ venv
 /IDE's/Netbeans/login/nbproject/private/
 /IDE's/Netbeans/login/build/
 /IDE's/Netbeans/competencesManagement/target/
-venv
+
+.circleci/
+.vscode/
+
