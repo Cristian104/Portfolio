@@ -1,6 +1,6 @@
 # Portfolio
 
-My personal developer portfolio: a compact, terminal-style one-pager with an interactive shell and an ASCII hero. English and Spanish.
+My personal developer portfolio: a compact, recruiter-friendly one-pager. English and Spanish.
 
 **Live:** [portfolio.mybrain.world](https://portfolio.mybrain.world)
 
@@ -9,7 +9,7 @@ My personal developer portfolio: a compact, terminal-style one-pager with an int
 - [Next.js](https://nextjs.org) 16 (App Router) + React 19
 - TypeScript
 - Tailwind CSS 4
-- JetBrains Mono (Fontsource), canvas ASCII field, English and Spanish (`/es`)
+- Inter (Fontsource), English and Spanish (`/es`)
 - Docker, deployed to a Linux VPS behind Cloudflare via GitHub Actions
 
 ## Run locally
