@@ -1,187 +1,195 @@
 import Image from "next/image";
 import Link from "next/link";
-import AsciiField from "./AsciiField";
-import Terminal from "./Terminal";
-import { ASCII_NAME, PERSON, dict, projects, stack, type Lang } from "@/lib/content";
+import { ArrowRight, ArrowUpRight, Github, Mail, Layers, Workflow, ShieldCheck, MapPin } from "lucide-react";
+import { PERSON, dict, projects, stack, type Lang } from "@/lib/content";
 
-const wrap = "mx-auto w-full max-w-5xl px-4 sm:px-6";
+const wrap = "mx-auto w-full max-w-6xl px-4 sm:px-6";
+const icons = [Layers, Workflow, ShieldCheck];
 
-/** Mono "command" eyebrow + clean sans heading: the terminal/professional mix. */
-function SectionHead({ id, cmd, title, aside }: { id: string; cmd: string; title: string; aside?: string }) {
+function SectionHead({ id, eyebrow, title, sub }: { id: string; eyebrow: string; title: string; sub?: string }) {
   return (
-    <div id={id} className="scroll-mt-20">
-      <p className="font-mono text-xs text-muted">
-        <span className="text-p">❯</span> {cmd}
-      </p>
-      <div className="mt-2 flex flex-wrap items-baseline justify-between gap-2">
-        <h2 className="text-2xl font-semibold tracking-tight text-fg sm:text-3xl">{title}</h2>
-        {aside && <span className="font-mono text-xs text-dim">{aside}</span>}
-      </div>
+    <div id={id} className="scroll-mt-24">
+      <p className="text-sm font-medium text-g">{eyebrow}</p>
+      <h2 className="mt-2 text-3xl font-semibold tracking-tight text-fg sm:text-4xl">{title}</h2>
+      {sub && <p className="mt-3 max-w-2xl text-muted">{sub}</p>}
     </div>
   );
 }
 
 export function Home({ lang }: { lang: Lang }) {
   const d = dict[lang];
+  const featured = projects.filter((p) => p.image);
+  const others = projects.filter((p) => !p.image);
+  const es = lang === "es";
 
   return (
     <>
-      <header className="sticky top-0 z-40 border-b border-line bg-bg/85 backdrop-blur-md">
-        <div className={`${wrap} flex h-14 items-center justify-between`}>
-          <Link href={lang === "es" ? "/es" : "/"} className="font-mono text-sm text-fg">
-            <span className="text-g">~</span>/{PERSON.handle}
+      <header className="sticky top-0 z-40 border-b border-line bg-bg/75 backdrop-blur-xl">
+        <div className={`${wrap} flex h-16 items-center justify-between gap-4`}>
+          <Link href={es ? "/es" : "/"} className="flex items-center gap-2.5 font-semibold tracking-tight">
+            <span className="grid h-8 w-8 place-items-center rounded-lg bg-gradient-to-br from-g to-p text-sm font-bold text-bg">CE</span>
+            <span className="hidden sm:inline">{PERSON.name}</span>
           </Link>
-          <nav aria-label="Main" className="flex items-center gap-4 text-sm sm:gap-6">
-            <a href="#work" className="text-muted transition-colors hover:text-fg">{d.nav.work}</a>
-            <a href="#about" className="hidden text-muted transition-colors hover:text-fg sm:inline">{d.nav.about}</a>
-            <a href="#stack" className="hidden text-muted transition-colors hover:text-fg md:inline">{d.nav.stack}</a>
-            <a href="#contact" className="text-muted transition-colors hover:text-fg">{d.nav.contact}</a>
-            <Link href={d.nav.otherHref} hrefLang={lang === "en" ? "es" : "en"} aria-label={d.nav.otherLabel} className="rounded border border-line-2 px-2 py-0.5 font-mono text-xs text-p hover:border-p">
+          <nav aria-label="Main" className="flex items-center gap-1 text-sm">
+            <a href="#work" className="rounded-md px-3 py-2 text-muted hover:text-fg">{d.nav.work}</a>
+            <a href="#about" className="hidden rounded-md px-3 py-2 text-muted hover:text-fg sm:inline">{d.nav.about}</a>
+            <a href="#skills" className="hidden rounded-md px-3 py-2 text-muted hover:text-fg md:inline">{d.nav.stack}</a>
+            <Link href={d.nav.otherHref} hrefLang={es ? "en" : "es"} aria-label={d.nav.otherLabel} className="rounded-md px-3 py-2 text-xs font-semibold text-muted hover:text-fg">
               {d.nav.other}
             </Link>
+            <a href="#contact" className="btn btn-primary ml-1 !px-4 !py-2 text-sm">{d.nav.contact}</a>
           </nav>
         </div>
       </header>
 
       <main>
-        {/* ── hero ─────────────────────────────────────────── */}
-        <section className="relative overflow-hidden border-b border-line">
-          <AsciiField className="opacity-80 [mask-image:linear-gradient(to_bottom,black_55%,transparent)]" />
-          <div className={`${wrap} relative pb-16 pt-12 sm:pt-16`}>
-            <p className="rise font-mono text-sm text-muted">
-              <span className="text-p">❯</span> <span className="text-fg">whoami</span>
+        {/* Hero */}
+        <section className="relative overflow-hidden">
+          <div className="hero-bg" aria-hidden />
+          <div className={`${wrap} relative pb-20 pt-16 sm:pb-28 sm:pt-24`}>
+            <p className="rise inline-flex items-center gap-2.5 rounded-full border border-line-2 bg-white/[0.03] px-3.5 py-1.5 text-sm text-muted">
+              <span className="pulse h-2 w-2 rounded-full bg-g" aria-hidden />
+              {d.badge}
             </p>
-            <h1 className="sr-only">{PERSON.name}</h1>
-            <pre aria-hidden className="ascii-name rise mt-4 w-fit max-w-full font-mono" style={{ ["--d" as string]: "80ms" }}>{ASCII_NAME.join("\n")}</pre>
-            <p className="rise cursor mt-6 font-mono text-base text-g sm:text-lg" style={{ ["--d" as string]: "160ms" }}>{d.role}</p>
-            <p className="rise mt-3 max-w-2xl text-lg leading-relaxed text-muted" style={{ ["--d" as string]: "220ms" }}>{d.pitch}</p>
-
-            <div className="mt-9 grid gap-6 md:grid-cols-[1fr_1.15fr] md:items-start">
-              <div className="rise" style={{ ["--d" as string]: "280ms" }}>
-                <dl className="box divide-y divide-line text-sm">
-                  {d.status.map(([k, v], i) => (
-                    <div key={k} className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-0.5 px-4 py-2.5">
-                      <dt className="font-mono text-xs uppercase tracking-wider text-dim">{k}</dt>
-                      <dd className={i === 0 ? "font-medium text-g" : "text-fg"}>
-                        {i === 0 && <span className="mr-2 inline-block h-2 w-2 rounded-full bg-g shadow-[0_0_8px_var(--g)]" aria-hidden />}
-                        {v}
-                      </dd>
-                    </div>
-                  ))}
-                </dl>
-                <div className="mt-5 flex flex-wrap gap-3">
-                  <a href={`mailto:${PERSON.email}`} className="btn btn-g">{d.cta.email} →</a>
-                  <a href={PERSON.github} target="_blank" rel="noopener noreferrer" className="btn">{d.cta.github} ↗</a>
-                </div>
-              </div>
-              <div className="rise hidden sm:block" style={{ ["--d" as string]: "340ms" }}>
-                <Terminal lang={lang} hint={d.term.hint} />
-              </div>
+            <h1 className="rise mt-7 text-[2.6rem] font-semibold leading-[1.05] tracking-[-0.035em] sm:text-6xl lg:text-7xl" style={{ ["--d" as string]: "60ms" }}>
+              {PERSON.name}
+            </h1>
+            <p className="rise mt-4 max-w-3xl text-2xl font-medium leading-snug tracking-tight sm:text-3xl" style={{ ["--d" as string]: "120ms" }}>
+              <span className="text-muted">{d.role}. </span>
+              <span className="grad-text">{d.headline.join(" ")}</span>
+            </p>
+            <p className="rise mt-6 max-w-2xl text-lg leading-relaxed text-muted" style={{ ["--d" as string]: "180ms" }}>{d.pitch}</p>
+            <div className="rise mt-9 flex flex-wrap items-center gap-3" style={{ ["--d" as string]: "240ms" }}>
+              <a href={`mailto:${PERSON.email}`} className="btn btn-primary">{d.cta.email} <ArrowRight size={16} aria-hidden /></a>
+              <a href="#work" className="btn">{d.viewWork}</a>
+              <a href={PERSON.github} target="_blank" rel="noopener noreferrer" className="btn"><Github size={16} aria-hidden /> GitHub</a>
             </div>
+
+            <dl className="rise mt-14 grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-line bg-line md:grid-cols-4" style={{ ["--d" as string]: "300ms" }}>
+              {d.status.map(([k, v]) => (
+                <div key={k} className="bg-bg-2/90 px-5 py-4">
+                  <dt className="text-xs font-medium uppercase tracking-wider text-dim">{k}</dt>
+                  <dd className="mt-1 text-[15px] text-fg">{v}</dd>
+                </div>
+              ))}
+            </dl>
           </div>
         </section>
 
-        {/* ── projects ─────────────────────────────────────── */}
-        <section className="py-16 sm:py-20">
+        {/* Work */}
+        <section className="border-t border-line py-20 sm:py-28">
           <div className={wrap}>
-            <SectionHead id="work" cmd={`ls ~/${d.work.title}`} title={d.work.heading} aside={d.work.hint} />
+            <SectionHead id="work" eyebrow={d.nav.work} title={d.work.heading} />
 
-            <div className="mt-6 overflow-hidden rounded-xl border border-line">
-              {projects.map((p, i) => (
-                <details key={p.id} id={`p-${p.id}`} className="row scroll-mt-24 border-b border-line last:border-b-0" open={i === 0}>
-                  <summary className="grid grid-cols-[1fr_auto] items-baseline gap-x-4 px-4 py-4 sm:grid-cols-[13rem_1fr_auto] sm:gap-x-6 sm:px-5">
-                    <span>
-                      <span className="row-name font-semibold text-fg transition-colors">{p.name}</span>
-                      <span className="mt-0.5 block font-mono text-xs text-p">{p.kind[lang]} · {p.year}</span>
-                    </span>
-                    <span className="col-span-2 row-start-2 mt-1.5 text-[15px] text-muted sm:col-span-1 sm:row-start-auto sm:mt-0">{p.line[lang]}</span>
-                    <span className="chev col-start-2 row-start-1 font-mono text-dim sm:col-start-auto sm:row-start-auto" aria-hidden>›</span>
-                  </summary>
-
-                  <div className="grid gap-5 px-4 pb-6 sm:pl-[calc(13rem+2.75rem)] sm:pr-5 md:grid-cols-[1fr_16rem]">
-                    <div>
-                      <ul className="space-y-2 text-[15px] text-fg/90">
-                        {p.points[lang].map((x) => (
-                          <li key={x} className="flex gap-2.5"><span className="font-mono text-g">›</span><span>{x}</span></li>
-                        ))}
-                      </ul>
-                      <div className="mt-4 flex flex-wrap items-center gap-1.5">
-                        {p.stack.map((s) => <span key={s} className="tag">{s}</span>)}
-                        {p.link && (
-                          <a href={p.link.href} target="_blank" rel="noopener noreferrer" className="ml-2 font-mono text-xs text-g underline-offset-4 hover:underline">
-                            {d.work.open} {p.link.label} ↗
-                          </a>
-                        )}
-                      </div>
+            <div className="mt-10 grid gap-6 md:grid-cols-2">
+              {featured.map((p, i) => (
+                <article key={p.id} className={`card overflow-hidden ${i === 0 ? "md:col-span-2 md:grid md:grid-cols-[1.25fr_1fr]" : ""}`}>
+                  <div className={`shot relative overflow-hidden border-line bg-bg-2 ${i === 0 ? "aspect-[16/10] border-b md:aspect-auto md:min-h-[340px] md:border-b-0 md:border-r" : "aspect-[16/9] border-b"}`}>
+                    <Image src={p.image!} alt={`${p.name} screenshot`} fill sizes={i === 0 ? "(min-width: 768px) 640px, 100vw" : "(min-width: 768px) 560px, 100vw"} className="object-cover object-top" />
+                  </div>
+                  <div className="flex flex-col p-6 sm:p-7">
+                    <p className="text-xs font-medium uppercase tracking-wider text-p">{p.kind[lang]} · {p.year}</p>
+                    <h3 className="mt-2 text-xl font-semibold tracking-tight">{p.name}</h3>
+                    <p className="mt-2 text-[15px] leading-relaxed text-muted">{p.line[lang]}</p>
+                    <ul className="mt-4 space-y-2 text-[14.5px] text-fg/85">
+                      {p.points[lang].slice(0, i === 0 ? 3 : 2).map((x) => (
+                        <li key={x} className="flex gap-2.5"><span className="mt-2.5 h-1 w-1 shrink-0 rounded-full bg-g" aria-hidden />{x}</li>
+                      ))}
+                    </ul>
+                    <div className="mt-auto flex flex-wrap items-center gap-1.5 pt-5">
+                      {p.stack.map((s) => <span key={s} className="chip">{s}</span>)}
                     </div>
-                    {p.image && (
-                      <div className="relative aspect-[16/10] overflow-hidden rounded-md border border-line-2">
-                        <Image src={p.image} alt={`${p.name} screenshot`} fill sizes="(min-width: 768px) 256px, 100vw" className="object-cover object-top" />
-                      </div>
+                    {p.link && (
+                      <a href={p.link.href} target="_blank" rel="noopener noreferrer" className="mt-5 inline-flex items-center gap-1 text-sm font-medium text-g hover:underline">
+                        {d.work.open} {p.link.label} <ArrowUpRight size={15} aria-hidden />
+                      </a>
                     )}
                   </div>
-                </details>
+                </article>
+              ))}
+            </div>
+
+            <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {others.map((p) => (
+                <article key={p.id} className="card card-lift flex flex-col p-6">
+                  <p className="text-xs font-medium uppercase tracking-wider text-p">{p.kind[lang]} · {p.year}</p>
+                  <h3 className="mt-2 text-lg font-semibold tracking-tight">{p.name}</h3>
+                  <p className="mt-2 text-[15px] leading-relaxed text-muted">{p.line[lang]}</p>
+                  <div className="mt-auto flex flex-wrap gap-1.5 pt-5">
+                    {p.stack.slice(0, 4).map((s) => <span key={s} className="chip">{s}</span>)}
+                  </div>
+                </article>
               ))}
             </div>
           </div>
         </section>
 
-        {/* ── about ────────────────────────────────────────── */}
-        <section className="border-t border-line py-16 sm:py-20">
-          <div className={wrap}>
-            <SectionHead id="about" cmd="cat about.md" title={d.about.heading} />
-            <p className="mt-4 max-w-2xl text-lg leading-relaxed text-muted">{d.about.intro}</p>
-            <div className="mt-8 grid gap-4 md:grid-cols-3">
-              {d.about.cards.map((c, i) => (
-                <div key={c.t} className="box p-5">
-                  <p className="font-mono text-xs text-p">0{i + 1}</p>
-                  <h3 className="mt-2 font-semibold text-fg">{c.t}</h3>
-                  <p className="mt-2 text-[15px] leading-relaxed text-muted">{c.d}</p>
-                </div>
-              ))}
+        {/* About */}
+        <section className="border-t border-line bg-bg-2 py-20 sm:py-28">
+          <div className={`${wrap} grid gap-12 lg:grid-cols-[1fr_1.4fr]`}>
+            <div>
+              <SectionHead id="about" eyebrow={d.nav.about} title={d.about.heading} sub={d.about.intro} />
+              <p className="mt-6 inline-flex items-center gap-2 text-sm text-dim"><MapPin size={15} aria-hidden /> {PERSON.location}</p>
+            </div>
+            <div className="grid gap-4">
+              {d.about.cards.map((c, i) => {
+                const Icon = icons[i];
+                return (
+                  <div key={c.t} className="card flex gap-5 p-6">
+                    <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl border border-line-2 bg-gradient-to-br from-g-deep/60 to-p-deep/60 text-g">
+                      <Icon size={20} aria-hidden />
+                    </span>
+                    <div>
+                      <h3 className="font-semibold">{c.t}</h3>
+                      <p className="mt-1.5 text-[15px] leading-relaxed text-muted">{c.d}</p>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           </div>
         </section>
 
-        {/* ── stack ────────────────────────────────────────── */}
-        <section className="border-t border-line bg-bg-2 py-16 sm:py-20">
+        {/* Skills */}
+        <section className="border-t border-line py-20 sm:py-28">
           <div className={wrap}>
-            <SectionHead id="stack" cmd="tree ~/stack" title={d.stackTitle} />
-            <div className="mt-6 grid gap-x-10 gap-y-5 sm:grid-cols-2">
-              {stack.map((s, i) => (
-                <div key={s.dir}>
-                  <p className="font-mono text-sm text-p">{i === stack.length - 1 ? "└──" : "├──"} {s.dir}/</p>
-                  <div className="mt-2 flex flex-wrap gap-1.5 pl-8">
-                    {s.items.map((it) => <span key={it} className="tag text-fg">{it}</span>)}
+            <SectionHead id="skills" eyebrow={d.nav.stack} title={d.stackTitle} />
+            <div className="mt-10 grid gap-px overflow-hidden rounded-2xl border border-line bg-line sm:grid-cols-2 lg:grid-cols-3">
+              {stack.map((s) => (
+                <div key={s.dir} className="bg-bg p-6">
+                  <h3 className="text-sm font-semibold text-fg">{s.dir}</h3>
+                  <div className="mt-3 flex flex-wrap gap-1.5">
+                    {s.items.map((it) => <span key={it} className="chip">{it}</span>)}
                   </div>
                 </div>
               ))}
+              <div className="hidden bg-bg p-6 lg:block">
+                <h3 className="text-sm font-semibold text-fg">{es ? "Idiomas" : "Languages"}</h3>
+                <div className="mt-3 flex flex-wrap gap-1.5">
+                  <span className="chip">{es ? "Inglés" : "English"}</span>
+                  <span className="chip">{es ? "Español" : "Spanish"}</span>
+                </div>
+              </div>
             </div>
           </div>
         </section>
 
-        {/* ── contact ──────────────────────────────────────── */}
-        <section className="border-t border-line py-16 sm:py-24">
+        {/* Contact */}
+        <section className="border-t border-line py-20 sm:py-28">
           <div className={wrap}>
-            <div id="contact" className="relative scroll-mt-20 overflow-hidden rounded-xl border border-line-2 bg-panel p-6 sm:p-10">
-              <div aria-hidden className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-p-deep blur-3xl" />
-              <div aria-hidden className="pointer-events-none absolute -bottom-28 -left-20 h-72 w-72 rounded-full bg-g-deep blur-3xl" />
+            <div id="contact" className="relative scroll-mt-24 overflow-hidden rounded-3xl border border-line-2 bg-panel px-6 py-14 text-center sm:px-12 sm:py-20">
+              <div aria-hidden className="pointer-events-none absolute -top-32 left-1/2 h-72 w-[38rem] -translate-x-1/2 rounded-full bg-p-deep/70 blur-3xl" />
+              <div aria-hidden className="pointer-events-none absolute -bottom-40 left-1/3 h-72 w-96 rounded-full bg-g-deep/60 blur-3xl" />
               <div className="relative">
-                <p className="font-mono text-xs text-muted"><span className="text-p">❯</span> ./contact.sh</p>
-                <h2 className="mt-3 text-3xl font-semibold tracking-tight text-fg sm:text-4xl">
-                  {d.contact.title}<span className="text-g">.</span>
-                </h2>
-                <p className="mt-3 max-w-xl text-lg text-muted">{d.contact.body}</p>
-                <a href={`mailto:${PERSON.email}`} className="mt-6 block break-all font-mono text-lg text-g underline-offset-4 hover:underline sm:text-xl">
-                  {PERSON.email}
-                </a>
-                <div className="mt-6 flex flex-wrap gap-3">
-                  <a href={`mailto:${PERSON.email}`} className="btn btn-g">{d.cta.email} →</a>
-                  <a href={PERSON.github} target="_blank" rel="noopener noreferrer" className="btn">{PERSON.githubLabel} ↗</a>
+                <h2 className="text-3xl font-semibold tracking-tight sm:text-5xl">{d.contact.title}</h2>
+                <p className="mx-auto mt-4 max-w-xl text-lg text-muted">{d.contact.body}</p>
+                <div className="mt-8 flex flex-wrap justify-center gap-3">
+                  <a href={`mailto:${PERSON.email}`} className="btn btn-primary"><Mail size={16} aria-hidden /> {PERSON.email}</a>
+                  <a href={PERSON.github} target="_blank" rel="noopener noreferrer" className="btn"><Github size={16} aria-hidden /> GitHub</a>
                 </div>
-                <p className="mt-6 text-sm text-dim">
+                <p className="mt-8 text-sm text-dim">
                   {d.contact.studio}{" "}
-                  <a href={lang === "es" ? `${PERSON.studio}/es/` : PERSON.studio} target="_blank" rel="noopener noreferrer" className="text-p hover:underline">wingwrightstudio.com ↗</a>
+                  <a href={es ? `${PERSON.studio}/es/` : PERSON.studio} target="_blank" rel="noopener noreferrer" className="text-muted underline-offset-4 hover:text-fg hover:underline">wingwrightstudio.com</a>
                 </p>
               </div>
             </div>
@@ -189,8 +197,8 @@ export function Home({ lang }: { lang: Lang }) {
         </section>
       </main>
 
-      <footer className="border-t border-line py-6">
-        <div className={`${wrap} flex flex-col gap-2 font-mono text-xs text-dim sm:flex-row sm:justify-between`}>
+      <footer className="border-t border-line py-8">
+        <div className={`${wrap} flex flex-col gap-2 text-sm text-dim sm:flex-row sm:justify-between`}>
           <span>© {new Date().getFullYear()} {PERSON.name}</span>
           <span>{d.footer}</span>
         </div>

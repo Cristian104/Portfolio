@@ -13,22 +13,6 @@ export const PERSON = {
   location: "Łódź, PL",
 };
 
-/** Generated with figlet (ANSI Shadow). */
-export const ASCII_NAME = [
-  " ██████╗██████╗ ██╗███████╗████████╗██╗ █████╗ ███╗   ██╗",
-  "██╔════╝██╔══██╗██║██╔════╝╚══██╔══╝██║██╔══██╗████╗  ██║",
-  "██║     ██████╔╝██║███████╗   ██║   ██║███████║██╔██╗ ██║",
-  "██║     ██╔══██╗██║╚════██║   ██║   ██║██╔══██║██║╚██╗██║",
-  "╚██████╗██║  ██║██║███████║   ██║   ██║██║  ██║██║ ╚████║",
-  " ╚═════╝╚═╝  ╚═╝╚═╝╚══════╝   ╚═╝   ╚═╝╚═╝  ╚═╝╚═╝  ╚═══╝",
-  "███████╗███████╗████████╗██████╗  █████╗ ██████╗  █████╗ ",
-  "██╔════╝██╔════╝╚══██╔══╝██╔══██╗██╔══██╗██╔══██╗██╔══██╗",
-  "█████╗  ███████╗   ██║   ██████╔╝███████║██║  ██║███████║",
-  "██╔══╝  ╚════██║   ██║   ██╔══██╗██╔══██║██║  ██║██╔══██║",
-  "███████╗███████║   ██║   ██║  ██║██║  ██║██████╔╝██║  ██║",
-  "╚══════╝╚══════╝   ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═╝╚═════╝ ╚═╝  ╚═╝",
-];
-
 export type Project = {
   id: string;
   name: string;
@@ -209,17 +193,20 @@ export const projects: Project[] = [
 ];
 
 export const stack = [
-  { dir: "frontend", items: ["TypeScript", "React", "Next.js", "Astro", "Tailwind", "GSAP", "Canvas"] },
-  { dir: "backend", items: ["Python", "FastAPI", "Node.js", "PostgreSQL", "SQLite", "REST"] },
-  { dir: "commerce", items: ["Shopify", "Liquid", "Shopify CLI"] },
-  { dir: "ai-automation", items: ["Gemini", "Claude", "n8n", "Telegram bots", "LLM integration"] },
-  { dir: "ops", items: ["Docker", "Linux", "Cloudflare", "GitHub Actions", "nginx"] },
+  { dir: "Front-end", items: ["TypeScript", "React", "Next.js", "Astro", "Tailwind", "GSAP", "Canvas"] },
+  { dir: "Back-end", items: ["Python", "FastAPI", "Node.js", "PostgreSQL", "SQLite", "REST"] },
+  { dir: "E-commerce", items: ["Shopify", "Liquid", "Shopify CLI"] },
+  { dir: "AI & automation", items: ["Gemini", "Claude", "n8n", "Telegram bots", "LLM integration"] },
+  { dir: "DevOps", items: ["Docker", "Linux", "Cloudflare", "GitHub Actions", "nginx"] },
 ];
 
 export const dict = {
   en: {
     nav: { work: "Work", about: "About", stack: "Skills", contact: "Contact", other: "ES", otherHref: "/es", otherLabel: "Ver en español" },
-    role: "Full-stack developer · e‑commerce, automation & AI",
+    role: "Full-stack developer",
+    headline: ["I build e‑commerce, automation", "and AI products, end to end."],
+    badge: "Available for new roles",
+    viewWork: "View work",
     pitch: "I design, build and ship complete products: storefronts, AI-powered pipelines and the infrastructure they run on. Everything below is live in production, built end to end by me.",
     status: [
       ["Availability", "Open to full-time, contract or freelance"],
@@ -244,12 +231,14 @@ export const dict = {
       body: "Hiring for a role, or have a project in mind? Email is the fastest way to reach me. I reply in English or Spanish.",
       studio: "Need a Shopify store? That's Wingwright Studio.",
     },
-    term: { hint: "type 'help' and press enter", placeholder: "help" },
-    footer: "hand-built with Next.js · self-hosted on my own VPS",
+    footer: "Built with Next.js · Self-hosted on my own infrastructure",
   },
   es: {
     nav: { work: "Proyectos", about: "Perfil", stack: "Habilidades", contact: "Contacto", other: "EN", otherHref: "/", otherLabel: "View in English" },
-    role: "Desarrollador full‑stack · e‑commerce, automatización e IA",
+    role: "Desarrollador full-stack",
+    headline: ["Construyo productos de e‑commerce,", "automatización e IA, de principio a fin."],
+    badge: "Disponible para nuevos puestos",
+    viewWork: "Ver proyectos",
     pitch: "Diseño, construyo y publico productos completos: tiendas, flujos con IA y la infraestructura donde corren. Todo lo de abajo está en producción, construido de principio a fin por mí.",
     status: [
       ["Disponibilidad", "Tiempo completo, contrato o freelance"],
@@ -274,7 +263,6 @@ export const dict = {
       body: "¿Buscas cubrir un puesto o tienes un proyecto en mente? El correo es la forma más rápida de contactarme. Respondo en inglés o español.",
       studio: "¿Necesitas una tienda Shopify? Eso es Wingwright Studio.",
     },
-    term: { hint: "escribe 'help' y pulsa enter", placeholder: "help" },
-    footer: "hecho a mano con Next.js · autoalojado en mi propio VPS",
+    footer: "Hecho con Next.js · Alojado en mi propia infraestructura",
   },
 } as const;
