@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @import "@fontsource-variable/jetbrains-mono";
+@import "@fontsource-variable/inter";
 
 :root {
   color-scheme: dark;
@@ -32,6 +33,7 @@
   --color-p: var(--p);
   --color-p-deep: var(--p-deep);
   --color-rose: var(--rose);
+  --font-sans: "Inter Variable", system-ui, -apple-system, "Segoe UI", sans-serif;
   --font-mono: "JetBrains Mono Variable", ui-monospace, SFMono-Regular, Menlo, monospace;
 }
 
@@ -40,22 +42,10 @@ html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
 body {
   background: var(--bg);
   color: var(--fg);
-  font-family: var(--font-mono);
-  font-size: 15px;
-  line-height: 1.6;
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.65;
   -webkit-font-smoothing: antialiased;
-}
-
-/* faint CRT scanlines + vignette over everything */
-body::after {
-  content: "";
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 50;
-  background:
-    repeating-linear-gradient(to bottom, rgb(255 255 255 / 0.018) 0 1px, transparent 1px 3px),
-    radial-gradient(ellipse at center, transparent 60%, rgb(0 0 0 / 0.45));
 }
 
 ::selection { background: var(--p); color: #0b0716; }
@@ -86,6 +76,7 @@ body::after {
 @keyframes blink { 50% { opacity: 0; } }
 
 .term-frame {
+  font-family: var(--font-mono);
   border: 1px solid var(--line-2);
   border-radius: 10px;
   background: rgb(11 15 14 / 0.82);
@@ -112,6 +103,7 @@ details.row:hover .row-name, details.row[open] .row-name { color: var(--g); }
 details.row[open] { background: linear-gradient(90deg, rgb(15 58 40 / 0.25), transparent 70%); }
 
 .tag {
+  font-family: var(--font-mono);
   display: inline-block;
   border: 1px solid var(--line-2);
   border-radius: 4px;
@@ -121,6 +113,7 @@ details.row[open] { background: linear-gradient(90deg, rgb(15 58 40 / 0.25), tra
 }
 
 .btn {
+  font-family: var(--font-mono);
   display: inline-flex;
   align-items: center;
   gap: 8px;

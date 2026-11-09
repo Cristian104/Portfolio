@@ -29,6 +29,7 @@ npm run dev   # → localhost:3000
 ## Conventions
 - Design: terminal/ASCII, dark only. Palette tokens in `app/app/globals.css` (black, phosphor green, purple); JetBrains Mono via Fontsource
 - Compact by design: one page a recruiter can scan in under a minute. Projects expand inline, no case-study pages
+- Professional mix: Inter for reading text and headings, JetBrains Mono only for accents (eyebrow commands, tags, buttons, terminal). Terminal is hidden on phones
 - App Router only; server components by default, client only for AsciiField and Terminal
 - Every animation respects prefers-reduced-motion
 - The site is public: never add private URLs, anything behind Cloudflare Access, secrets, myshopify domains/passwords, or personal content (e.g. Kamila's poems or CV) without asking Cristian
