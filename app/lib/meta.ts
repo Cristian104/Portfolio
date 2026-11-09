@@ -2,12 +2,12 @@ import type { Metadata } from "next";
 import { PERSON, type Lang } from "./content";
 
 const desc = {
-  en: "Cristian Estrada builds Shopify stores, fast custom sites and the automation behind them for small businesses. English and Spanish.",
-  es: "Cristian Estrada crea tiendas Shopify, sitios rápidos a medida y la automatización detrás de ellos para pequeños negocios. Inglés y español.",
+  en: "Cristian Estrada, full-stack developer in e-commerce, automation and AI. Storefronts, AI pipelines and self-hosted infrastructure, built and shipped solo.",
+  es: "Cristian Estrada, desarrollador full-stack en e-commerce, automatización e IA. Tiendas, flujos con IA e infraestructura propia, de principio a fin.",
 };
 
 export function meta(lang: Lang, path = "", title?: string, description?: string): Metadata {
-  const t = title ? `${title} · ${PERSON.name}` : `${PERSON.name} · ${lang === "es" ? "Tiendas Shopify y automatización" : "Shopify stores & automation"}`;
+  const t = title ? `${title} · ${PERSON.name}` : `${PERSON.name} · ${lang === "es" ? "Desarrollador full-stack" : "Full-stack developer"}`;
   const d = description ?? desc[lang];
   const en = path || "/";
   const es = `/es${path}`;

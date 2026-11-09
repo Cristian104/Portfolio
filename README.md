@@ -1,6 +1,6 @@
 # Portfolio
 
-My personal portfolio site: selected projects in e-commerce, automation and infrastructure.
+My personal developer portfolio: a compact, terminal-style one-pager with an interactive shell and an ASCII hero. English and Spanish.
 
 **Live:** [portfolio.mybrain.world](https://portfolio.mybrain.world)
 
@@ -9,7 +9,7 @@ My personal portfolio site: selected projects in e-commerce, automation and infr
 - [Next.js](https://nextjs.org) 16 (App Router) + React 19
 - TypeScript
 - Tailwind CSS 4
-- Fontsource (Instrument Serif + Inter), English and Spanish (`/es`)
+- JetBrains Mono (Fontsource), canvas ASCII field, English and Spanish (`/es`)
 - Docker, deployed to a Linux VPS behind Cloudflare via GitHub Actions
 
 ## Run locally
