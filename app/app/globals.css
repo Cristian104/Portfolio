@@ -1,66 +1,111 @@
-@import url('https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300&family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
 @import "tailwindcss";
+@import "@fontsource/instrument-serif/400.css";
+@import "@fontsource/instrument-serif/400-italic.css";
+@import "@fontsource-variable/inter";
 
 :root {
-  --bg: #0F172A;
-  --surface: #1E293B;
-  --surface-2: #334155;
-  --accent: #22C55E;
-  --accent-dim: rgba(34, 197, 94, 0.10);
-  --text: #F8FAFC;
-  --text-muted: #94A3B8;
-  --border: rgba(255,255,255,0.07);
+  --paper: #f8f5ef;
+  --paper-2: #efeae0;
+  --ink: #1c2541;
+  --ink-soft: #4a5270;
+  --muted: #6b7189;
+  --line: rgb(28 37 65 / 0.12);
+  --honey: #e9a23b;
+  --honey-ink: #9a5d08;
+  --card: #ffffff;
+  --navy: #1c2541;
+  --on-navy: #f8f5ef;
 }
 
-@theme inline {
-  --color-background: var(--bg);
-  --color-foreground: var(--text);
-}
-
-* { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
-
-body {
-  background-color: var(--bg);
-  color: var(--text);
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 16px;
-  line-height: 1.65;
-  -webkit-font-smoothing: antialiased;
-}
-
-h1, h2, h3, h4, h5, h6 {
-  font-family: 'Archivo', sans-serif;
-  font-weight: 700;
-  line-height: 1.1;
-}
-
-::selection {
-  background: var(--accent);
-  color: #0F172A;
-}
-
-::-webkit-scrollbar { width: 4px; }
-::-webkit-scrollbar-track { background: var(--bg); }
-::-webkit-scrollbar-thumb { background: var(--surface-2); border-radius: 2px; }
-
-/* UI UX Pro Max: respect reduced motion */
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: #10141f;
+    --paper-2: #171c2b;
+    --ink: #f1ede5;
+    --ink-soft: #c9c6c0;
+    --muted: #9a9caa;
+    --line: rgb(241 237 229 / 0.12);
+    --honey: #f0b04f;
+    --honey-ink: #f0b04f;
+    --card: #171c2b;
+    --navy: #1c2541;
+    --on-navy: #f8f5ef;
   }
 }
 
-/* UI UX Pro Max: hero fluid sizing */
-.hero-title {
-  font-size: clamp(3.5rem, 10vw, 9rem);
+@theme inline {
+  --color-paper: var(--paper);
+  --color-paper-2: var(--paper-2);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-honey: var(--honey);
+  --color-honey-ink: var(--honey-ink);
+  --color-card: var(--card);
+  --color-navy: var(--navy);
+  --color-on-navy: var(--on-navy);
+  --font-display: "Instrument Serif", "Iowan Old Style", Georgia, serif;
+  --font-sans: "Inter Variable", system-ui, -apple-system, "Segoe UI", sans-serif;
 }
 
-/* UI UX Pro Max: accessible focus rings */
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--honey);
+  color: #1c2541;
+}
+
 :focus-visible {
-  outline: 2px solid var(--accent);
+  outline: 2px solid var(--honey);
   outline-offset: 3px;
   border-radius: 4px;
+}
+
+/* Reveal on scroll: content is visible by default; JS opts in. */
+.js [data-reveal] {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: var(--d, 0ms);
+}
+.js [data-reveal].in {
+  opacity: 1;
+  transform: none;
+}
+
+.hero-line {
+  display: block;
+  animation: rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: var(--d, 0ms);
+}
+@keyframes rise {
+  from { opacity: 0; transform: translateY(0.4em); }
+  to { opacity: 1; transform: none; }
+}
+
+.shot img {
+  transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.shot:hover img {
+  transform: scale(1.03);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .js [data-reveal] { opacity: 1; transform: none; transition: none; }
+  .hero-line { animation: none; }
+  .shot img { transition: none; }
+  .shot:hover img { transform: none; }
 }
