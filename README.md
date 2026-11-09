@@ -9,7 +9,7 @@ My personal portfolio site: selected projects in e-commerce, automation and infr
 - [Next.js](https://nextjs.org) 16 (App Router) + React 19
 - TypeScript
 - Tailwind CSS 4
-- Framer Motion
+- Fontsource (Instrument Serif + Inter), English and Spanish (`/es`)
 - Docker, deployed to a Linux VPS behind Cloudflare via GitHub Actions
 
 ## Run locally
