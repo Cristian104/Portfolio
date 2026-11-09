@@ -1,0 +1,30 @@
+name: Notify Brain
+
+# Copy to .github/workflows/notify-brain.yml in each project repo.
+# Needs repo secret BRAIN_TOKEN: a fine-grained PAT with Contents: read/write on
+# Cristian104/Brain (repository_dispatch needs write). Set BRAIN_PATH below.
+
+on:
+  push:
+    branches: [main]
+
+env:
+  BRAIN_PATH: projects/portfolio
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Dispatch project-updated to Brain
+        env:
+          BRAIN_TOKEN: ${{ secrets.BRAIN_TOKEN }}
+        run: |
+          if [ -z "$BRAIN_TOKEN" ]; then
+            echo "::warning::BRAIN_TOKEN secret not set, skipping Brain sync"
+            exit 0
+          fi
+          curl -sS --fail-with-body -X POST \
+            -H "Authorization: Bearer $BRAIN_TOKEN" \
+            -H "Accept: application/vnd.github+json" \
+            https://api.github.com/repos/Cristian104/Brain/dispatches \
+            -d "{\"event_type\":\"project-updated\",\"client_payload\":{\"path\":\"$BRAIN_PATH\"}}"
